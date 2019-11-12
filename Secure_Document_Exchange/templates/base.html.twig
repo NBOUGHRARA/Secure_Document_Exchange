@@ -10,41 +10,47 @@
     </head>
     <body>
     	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="{{ path('home_index') }}">Home</a>
+            <a class="navbar-brand" href="{{ path('home_index') }}">{% trans %}Home{% endtrans %} </a>
     		<div class="collapse navbar-collapse" id="navbarColor01">
     			<ul class="navbar-nav mr-auto">
                     {% if app.session.get('canImportFile') %}
         				<li class="nav-item">
-        					<a class="nav-link" href="{{ path('home_import') }}">Import file</a>
+        					<a class="nav-link" href="{{ path('home_import') }}">{% trans %}Import file{% endtrans %}</a>
         				</li>
                     {% endif %}
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="settings">
-                                Settings 
+                                {% trans %}Settings{% endtrans %} 
                                 <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="settings">
-                                <a class="dropdown-item" href="{{ path('settings_users') }}">Users</a>
-                                <a class="dropdown-item" href="{{ path('settings_import_permissions') }}">Import permissions</a>
-                                <a class="dropdown-item" href="{{ path('settings_roles') }}">Roles</a>
+                                <a class="dropdown-item" href="{{ path('settings_users') }}">{% trans %}Users{% endtrans %}</a>
+                                <a class="dropdown-item" href="{{ path('settings_import_permissions') }}">
+                                    {% trans %}Import permissions{% endtrans %}
+                                </a>
+                                <a class="dropdown-item" href="{{ path('settings_roles') }}">{% trans %}Roles{% endtrans %}</a>
                             </div>
                         </li>
                     {% endif %}
     				{% if not app.user %}
         			    <li class="nav-item">
-        					<a class="nav-link" href="{{ path('app_login') }}">Login</a>
+        					<a class="nav-link" href="{{ path('app_login') }}">{% trans %}Login{% endtrans %}</a>
         			    </li>
     				{% else %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="Profile">
-                                Profile
+                                {% trans %}Profile{% endtrans %}
                                 <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="Profile">
-                                <a class="dropdown-item" href="{{ path('profile_editPass') }}">Change password</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+                                <a class="dropdown-item" href="{{ path('profile_editPass') }}">
+                                    {% trans %}Change password{% endtrans %}
+                                </a>
+                                <a class="dropdown-item" href="{{ path('profile_language') }}">
+                                    {% trans %}Change language{% endtrans %}
+                                </a>
+                                <a class="dropdown-item" href="{{ path('app_logout') }}">{% trans %}Logout{% endtrans %}</a>
                             </div>
                         </li>
     				{% endif %}
