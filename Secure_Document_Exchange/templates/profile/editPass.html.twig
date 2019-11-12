@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+	<div class="mt-2" style="margin-left:10%;margin-right:10%;">
+		{{form_start(form)}}
+			{{form_row(form.password)}}
+			{{form_row(form.confirm_password)}}
+			<div class="mt-2">
+				<button class="btn btn-success" type="submit">Add !</button>
+				<a class="btn btn-danger" href="{{ path('home_index') }}">Cancel</a>
+			</div>
+
+		{{form_end(form)}}
+	</div>
+{% endblock %}

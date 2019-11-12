@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+    	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="{{ path('home_index') }}">Home</a>
+    		<div class="collapse navbar-collapse" id="navbarColor01">
+    			<ul class="navbar-nav mr-auto">
+                    {% if app.session.get('canImportFile') %}
+        				<li class="nav-item">
+        					<a class="nav-link" href="{{ path('home_import') }}">Import file</a>
+        				</li>
+                    {% endif %}
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="settings">
+                                Settings 
+                                <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="settings">
+                                <a class="dropdown-item" href="{{ path('settings_users') }}">Users</a>
+                                <a class="dropdown-item" href="{{ path('settings_import_permissions') }}">Import permissions</a>
+                                <a class="dropdown-item" href="{{ path('settings_roles') }}">Roles</a>
+                            </div>
+                        </li>
+                    {% endif %}
+    				{% if not app.user %}
+        			    <li class="nav-item">
+        					<a class="nav-link" href="{{ path('app_login') }}">Login</a>
+        			    </li>
+    				{% else %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="Profile">
+                                Profile
+                                <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="Profile">
+                                <a class="dropdown-item" href="{{ path('profile_editPass') }}">Change password</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+                            </div>
+                        </li>
+    				{% endif %}
+    			</ul>
+    		</div>
+    	</nav>
+        <div id="flash-message" class="bg-success"></div>
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+        {% endblock %}
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block title %}uploading file{% endblock %}
+
+{% block body %}
+
+	<br>
+
+	<div style="margin-left:5%; margin-right:5%;">
+
+		{{form_start(file)}}
+
+			{{form_row(file.fileName)}}
+			{{form_row(file.fileDirectory)}}
+			<br>
+			<label for="permissions">Permissons</label>
+			<div name="permissions">
+				{{form_row(file.canWrite, {'label':'Write *'})}}
+				{{form_row(file.canRead, {'label':'Read *'})}}
+				{{form_row(file.canDelete, {'label':'Delete *'})}}
+			</div>
+				{% if isEdit %}
+					<button class="btn btn-success mt-2" type="submit">Modify !</button>
+				{% else %}
+					<button class="btn btn-success mt-2" type="submit">Import !</button>
+				{% endif %}
+			
+
+		{{form_end(file)}}
+	</div>
+
+{% endblock %}
+{% block javascripts %}
+	<script>
+		{% if isEdit %}
+			$("#document_fileDirectory").closest('div').remove();
+		{% endif %}
+	</script>
+{% endblock %}	

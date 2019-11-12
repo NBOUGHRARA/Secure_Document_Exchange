@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Settings! {% endblock %}
+
+{% block body %}
+
+	<a class="btn btn-secondary mt-2 mb-2" style="float:right" href="{{ path('settings_add_user') }}">Add user</a>
+	<table class="table table-hover">
+		<tbody>
+			{% for user in users %}
+				<tr>
+					<th>{{ user.email }}</th>
+					<td> 
+						{% for role in user.roles %}
+							<p>{{ role }}</p>
+						{% endfor %} 
+					</td>
+					<td> 
+						{% if user.isDeleted %}
+							<i class="fas fa-ban disabled"></i>
+						{% else %}
+							<i class="fas fa-check-circle disabled"></i>
+						{% endif %} 
+					</td>
+					<td>
+						<a class="btn btn-outline-success" style="float:right" href="{{path('settings_edit_user', {'id':user.id})}}">
+							<i class="fas fa-pencil-alt"></i>
+						</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}

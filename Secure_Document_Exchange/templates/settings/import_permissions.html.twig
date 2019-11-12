@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Settings! {% endblock %}
+
+{% block body %}
+
+    <div class="mt-2" style="margin-left:10%;margin-right:10%;">
+		{{form_start(form)}}
+		
+			<label class="form-control text-center mb-3"><strong>Updating Permissions to import files</strong></label>
+			{{form_row(form.data)}}
+			<button class="btn btn-success mt-2" type="submit">Update !</button>
+
+		{{form_end(form)}}
+	</div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Settings! {% endblock %}
+
+{% block body %}
+
+    <div class="mt-2" style="margin-left:10%;margin-right:10%;">
+
+		{{form_start(userForm)}}
+
+			<label class="form-controm"><b>Modifying roles for : {{user.email}}</b></label>
+			
+			{{form_row(userForm.roles)}}
+			{{form_row(userForm.isDeleted, {'label': 'Disable User', 'attr' : {'class' : 'w-10 ml-2 mt-3'}})}}
+
+			<button class="btn btn-success" type="submit">Save</button>
+			<a class="btn btn-danger" href="{{ path('settings_users') }}">Cancel</a>
+
+		{{form_end(userForm)}}
+	</div>
+
+{% endblock %}

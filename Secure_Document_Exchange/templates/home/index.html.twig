@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+	
+	<table class="table table-hover">
+		
+		<tbody>
+			{% for file in files %}
+				<tr>
+					<th>{{ file.fileName }}</th>
+					<td>
+						<sapn class="btn-group" role="group" aria-label="Basic example" style="float:right">
+							{% if permissions[file.Id]['canRead'] %}
+								<a class="btn btn-outline-success" href="{{ asset('uploads/docs/' ~ file.fileDirectory) }}" target="_App">
+									Read
+								</a>
+							{% endif %}
+							{% if permissions[file.Id]['canWrite'] %}
+								<a class="btn btn-outline-warning" href="{{ path('home_edit', {id : file.id}) }}">
+									Modify
+								</a>
+							{% endif %}
+							{% if permissions[file.Id]['canDelete'] %}
+								<a class="btn btn-outline-danger" href="{{ path('home_delete', {'id' : file.id}) }}">
+									Delete
+								</a>
+							{% endif %}
+						</sapn>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+        
+		$(".btn-outline-danger").click(function(event){
+			event.preventDefault();
+			deletedRow = $(this).closest('tr');
+			if (confirm("Are you sure to delete this document permanently !")) {
+				$.ajax({
+					url : this.href,
+					success : function(response){
+						deletedRow.remove();
+						$("#flash-message").text(response.message);
+						$("#flash-message").slideDown(500).delay(2000).slideUp(500);
+					},
+					error : function(response){
+						alert(response.message);
+					}
+				});
+			} else {
+				return false;
+			}
+		});
+
+	</script>
+{% endblock %}
