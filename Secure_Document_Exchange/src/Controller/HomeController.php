@@ -17,6 +17,7 @@ use App\Service\Permissions;
 use App\Repository\FilesRepository;
 use App\Repository\SettingsRepository;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class HomeController extends AbstractController
 {
@@ -26,13 +27,15 @@ class HomeController extends AbstractController
     private $filesRepo;
     private $permissionsService;
     private $settingsRepo;
+    private $translator;
 
     public function __construct(
         SessionInterface $session,
         FilesRepository $filesRepo,
         Permissions $permissionsService,
         SettingsRepository $settingsRepo,
-        ObjectManager $manager
+        ObjectManager $manager,
+        TranslatorInterface $translator
 
     )
     {
@@ -41,6 +44,7 @@ class HomeController extends AbstractController
         $this->filesRepo = $filesRepo;
         $this->permissionsService = $permissionsService;
         $this->settingsRepo = $settingsRepo;
+        $this->translator = $translator;
     }
 
     /**
@@ -74,10 +78,16 @@ class HomeController extends AbstractController
         $isEdit = false;
         if ($file === null) {
             $importPermissions = $this->settingsRepo->findOneBy(['code' => 'IMPORT_PERMISSIONS'])->getData();
-            $this->denyAccessWithoutPermission($importPermissions, 'Access Denied: You haven\'t access to import files !');
+            $this->denyAccessWithoutPermission(
+                $importPermissions,
+                $this->translator->trans("Access Denied, You haven't access to import files !")
+            );
             $file = new Files();
         } else {
-            $this->denyAccessWithoutPermission($file->getCanWrite(), 'Access Denied: You can\'t modify this file !');
+            $this->denyAccessWithoutPermission(
+                $file->getCanWrite(),
+                $this->translator->trans("Access Denied, You can't modify this file !")
+            );
             $isEdit = true;
         }
 
@@ -115,7 +125,10 @@ class HomeController extends AbstractController
      */
     public function delete(Files $file)
     {
-        $this->denyAccessWithoutPermission($file->getCanDelete(), 'Access Denied: You can\'t delete this file !');
+        $this->denyAccessWithoutPermission(
+            $file->getCanDelete(),
+            $this->translator->trans("Access Denied, You can't delete this file !")
+        );
         try {
             $file->setIsDeleted(true)
                 ->setUpdatedAt(new \DateTime())

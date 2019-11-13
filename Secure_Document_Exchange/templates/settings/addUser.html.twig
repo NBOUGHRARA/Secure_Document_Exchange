@@ -15,8 +15,8 @@
 			{{form_row(form.isDeleted, {'label': 'Disable User', 'attr' : {'class' : 'w-10 ml-2 mt-3'}})}}
 
 
-			<button class="btn btn-success" type="submit">Add !</button>
-			<a class="btn btn-danger" href="{{ path('settings_users') }}">Cancel</a>
+			<button class="btn btn-success" type="submit">{% trans %}Add{% endtrans %} !</button>
+			<a class="btn btn-danger" href="{{ path('settings_users') }}">{% trans %}Cancel{% endtrans %}</a>
 
 		{{form_end(form)}}
 	</div>

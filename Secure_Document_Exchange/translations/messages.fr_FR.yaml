@@ -1,6 +1,14 @@
 #Alphabetical Order, Important !!!
 
+Access Denied, You can't delete this file ! : Accès réfuser, Vous ne pouvez pas supprimer ce fichier
+Access Denied, You can't modify this file ! : Accès réfuser, Vous ne pouvez pas modifier ce fichier
+Access Denied, You haven't access to import files !: Accès réfuser, Vous ne pouvez pas importer des fichiers
+Add: Ajouter
+Add New Role: Ajouter un nouveau Role
+Add user : Ajouter utilisateur
 Available Languages: Langues disponibles
+Available Roles: Les Roles disponibles
+Cancel: Annuler
 Change language: Changer la langue
 Change password: Changer le mot de passe
 Choose language: Veuillez choisir une langue
@@ -9,5 +17,9 @@ Import file: Importer un nouveau fichier
 Import permissions: Permissions sur l'import des fichiers
 Login: Se connecter
 Logout: Se déconnecter
+Modifying roles for : Modification des roles pour
+Save: Enregistrer
 Settings: Paramètres 
+Update : Mettre à jour 
+Updating Permissions to import files: Mise à jour des permissions sur l'import des fichiers
 Users: Utilisateurs

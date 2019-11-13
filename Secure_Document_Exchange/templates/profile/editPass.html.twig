@@ -8,8 +8,8 @@
 			{{form_row(form.password)}}
 			{{form_row(form.confirm_password)}}
 			<div class="mt-2">
-				<button class="btn btn-success" type="submit">Add !</button>
-				<a class="btn btn-danger" href="{{ path('home_index') }}">Cancel</a>
+				<button class="btn btn-success" type="submit">{% trans %}Add{% endtrans %} !</button>
+				<a class="btn btn-danger" href="{{ path('home_index') }}">{% trans %}Cancel{% endtrans %}</a>
 			</div>
 
 		{{form_end(form)}}
